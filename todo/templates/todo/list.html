@@ -1,0 +1,20 @@
+<h1>todo</h1>
+
+<form method="POST" action="/">
+    {% csrf_token %}
+    {{ form.title }}
+    <input type="submit" name="create todo">
+</form>
+
+{% for todo in todos %}
+<div>
+    <div> 
+        {% if todo.complete == True %}
+        <strike>{{todo}} </strike>
+        {% else %}
+        <span>{{todo}}</span>
+        {% endif %}
+    <a href="{% url 'update_todo' todo.id %}">update</a> 
+    <a href="{% url 'delete' todo.id %}">delete</a></div>
+</div>
+{% endfor %}
